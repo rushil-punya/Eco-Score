@@ -1,0 +1,25 @@
+{%load static%}
+<html lang="en">
+<head>
+    <title>Login</title>
+    <link rel = "stylesheet" type = "text/css" href ="{% static 'loginStyle.css' %}?version = 13"> 
+</head>
+<body>
+    <div class="loginbox">
+        <img src="{% static 'avatar.png' %}" class = "avatar">
+            <h1>Login Here</h1>
+            {% block content %}
+            <form method = "POST" class = "form-group">
+                {% csrf_token %}
+                {{ form }}
+               <!----   <p>Username</p>
+                <input type = "username" name = "" placeholder = "Enter Username">
+                <P>Password</P>
+                <input type="password" name = "" placeholder="Enter Password">-->
+                <input type="submit" name ="" value= "Login">
+                <br>
+                <a href="{% url 'login:createaccount'%}" style = "font-size: small;"class = "link">Create Account</a>
+            </form>
+            {% endblock %}
+    </div>
+</body>

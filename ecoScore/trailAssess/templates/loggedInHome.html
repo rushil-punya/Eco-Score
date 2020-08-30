@@ -1,0 +1,36 @@
+{%load static%}
+<html lang="en">
+<head>
+    <title>Trail Blogs</title>
+    <link rel = "stylesheet" href ="{% static 'userLogStyle.css' %}?version = 4">
+    
+</head>
+<body>
+    <header>
+        <div class = "main">
+            <div class ="logo">
+                <img src = "{% static 'Placeholder-1.png' %}">
+            </div>
+            <ul>
+                <li class = "active"><a href="#">Home</a></li>
+                {% csrf_token %}
+                <li><a class ="logout" href="{% url 'login:logout'%}">Logout</a></li>
+            </ul>
+        </div>
+        <h2>WELCOME {{request.user.username|upper}}</h2>
+        <div class = "title">
+            <h1>TRAIL BLOGS</h1>
+            
+        </div>
+
+        <div class = "button">
+            <a href="{% url 'ecoButton'%}" class = "btn">ECO SCORE</a>
+        </div>
+    </header>
+    <div class="container">
+        <div class="text">
+            <h1></h1>
+        </div>
+    </div>
+</body>
+</html>

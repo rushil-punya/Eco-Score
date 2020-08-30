@@ -1,0 +1,28 @@
+{%load static%}
+{% load crispy_forms_tags %}
+<html lang="en">
+<head>
+    <title>Login</title>
+    <link rel = "stylesheet" type = "text/css" href ="{% static 'registerStyle.css' %}?version = 1">    
+</head>
+<body>
+    <div class="loginbox">
+        <img src="{% static 'avatar.png' %}" class = "avatar">
+            <h1>Register Here</h1>
+            <!----  allows users to register using django default form -->
+            <form method = "POST" class = "form-group">
+                {% csrf_token %}
+                {{form|crispy}}
+<!----                <p>Username</p>
+                <input type = "text" name = "" placeholder = "Enter Username">
+                <p>Email</p>
+                <input type = "text" name = "" placeholder = "Enter Email">
+                <P>Password</P>
+                <input type="password" name = "" placeholder="Enter Password">
+                <P>Password</P>
+                <input type="password" name = "" placeholder="Enter Password Again"> -->
+                <br>
+                <input type="submit" name ="" value= "Register" class = "btn btn-success">
+            </form>
+    </div>
+</body>

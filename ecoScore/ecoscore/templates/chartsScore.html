@@ -1,0 +1,29 @@
+{%load static%}
+<html lang="en">
+<head>
+    <title>Trail Blogs</title>
+    <link rel = "stylesheet" href ="{% static 'calculateStyle.css' %}?version = 1">
+    
+</head>
+<body>
+    <header>
+        <div class = "main">
+            <div class ="logo">
+                <img src = "{% static 'Placeholder-1.png' %}">
+            </div>
+            <ul>
+                <li class = "active"><a href="{% url 'logged'%}">Home</a></li>
+                {% csrf_token %}
+                <li><a class ="logout" href="{% url 'login:logout'%}">Logout</a></li>
+            </ul>
+        </div>
+        <h2></h2>
+        <div class = "title">
+            <h1>{{request.user.username|upper}}'S ECO SCORE: <h1 style="color: rgb(84, 235, 127);">{{ecoScore}}</h1><br><h1>AVERAGE ECO SCORE OF ALL USERS: <h1 style="color: rgb(84, 235, 127);">{{average}}</h1></h1>
+        </div>
+		<div class = "button">
+			<a href="{% url 'ecoButton'%}" class = "btn">CALCULATE AGAIN</a>
+        </div>
+    </header>
+</body>
+</html>

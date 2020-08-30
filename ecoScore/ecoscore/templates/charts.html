@@ -1,0 +1,96 @@
+{%load static%}
+{% load app_filters %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ECO SCORE</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="{% static 'buttonSelect.js' %}?version = 8"></script>
+<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
+<link href="{% static 'chartsStyle.css' %}?version = 13" rel="stylesheet" type="text/css" media="all" />
+<link href="{% static 'fonts.css' %}?version = 1" rel="stylesheet" type="text/css" media="all" />
+
+<!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
+
+</head>
+<body>
+
+<div id="header-wrapper">
+	<div class ="logo">
+		<img src = "{% static 'Placeholder-1.png' %}">
+	</div>
+	<div id="header" class="container">
+		<div class = "main">
+            <ul>
+                <li class = "active"><a href="{% url 'logged'%}">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Popular</a></li>
+                {% csrf_token %}
+                <li><a class ="logout" href="{% url 'login:logout'%}">Logout</a></li>
+            </ul>
+        </div>
+	</div>
+	<div id="banner" class="container">
+		<p style="font-size:20px">This is where you can take a look at your <strong>Eco Score</strong>, a score which determines the overall sustainable nature of your lifestyle <br> along with the average sustainablity score of all users! </p>		
+	</div>
+</div>
+<div id="page-wrapper">
+	<div id="featured" class="container">
+		<div class="title">
+			<h2>Eco Score Calculator</h2>
+			<h3><b>Instructions: Click all the buttons which apply to you and then click calculate to see your score. </b><br>Note: Each button can only be applied to your eco score once</h3>
+		</div>
+		<div class = "score">
+			<a href="{% url 'calculate'%}" class="buttonSubmit">CALCULATE</a>
+		</div>
+		<div class = "buttons">
+		<div class="tbox1">
+				<h2>ECO NEGATIVE</h2>
+				<div class = "cells">
+					{%for Cell in cells%}
+					{%if Cell.isClean == False%}
+					{%if forloop.counter|divisibleby:1 == 1%}
+					</div>
+					<div>
+					<a href="{% url 'select' slug=Cell.slug%}" onclick="scrollPos" class="buttonBad">{{Cell.title}}</a>
+					{%else%}
+					<a href="{% url 'select' slug=Cell.slug%}" onclick="scrollPos" class="buttonBad">{{Cell.title}}</a>
+					{%endif%}
+					{%endif%}
+					{%endfor%}
+				</div>
+		</div>
+		<div class="tbox2">
+			<h2>ECO POSITIVE</h2>
+			<div class = "cells">
+				{%for Cell in cells%}
+				{%if Cell.isClean == True%}
+				{%if forloop.counter|divisibleby:1 == 1%}
+				</div>
+				<div>
+				<a href="{% url 'select' slug=Cell.slug%}" onclick="scrollPos" class="buttonGood">{{Cell.title}}</a>
+				{%else%}
+				<a href="{% url 'select' slug=Cell.slug%}" onclick="scrollPos" class="buttonGood">{{Cell.title}}</a>
+				{%endif%}
+				{%endif%}
+				{%endfor%}
+			</div>
+		</div>
+	</div>
+	</div>
+	<div class = "suggestions">
+		<h2>Suggestions/Ideas for more buttons to add to the calculator: </h2>
+		<form method = "POST" name='/data/'>
+			{% csrf_token %}
+			{{ form }}
+		<input class = "submit" type = 'submit'>
+		</form>
+	</div>
+	<script type="text/javascript" src="{% static 'maintainscroll.min.js' %}"></script>
+</body>
+</body>
+</html>
